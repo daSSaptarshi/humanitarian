@@ -1,0 +1,51 @@
+<!-- <navbar></navbar> -->
+<div class="container">
+
+    <navbar></navbar>
+    <div class="posts_container">
+        <form class="new_post_container" [formGroup] = "createPostForm" (ngSubmit)="onCreatePostFormSubmit()">
+            <div class="heading">
+                Create New Post
+            </div>
+            <input type="text" name="title" id="" placeholder="Title (maximum 200 character)" maxlength="200" formControlName="title">
+            <textarea name="body" id="" cols="30" rows="5" placeholder="Details" formControlName="content"></textarea>
+            <div class="button_container">
+                
+                <div class="lead_button">
+                   Mark As Advertisement &nbsp;
+                    <label class="switch">  
+                        <input type="checkbox" formControlName="is_advertisement">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <input type="file" name="" id="" #imageFile style="display: none;" accept=".jpg,.jpeg,.png" (change)="processFile(imageFile)" formControlName="image">
+                <div class="actions">
+                    <div class="add_image" (click)="imageFile.click()" *ngIf="createPostForm.value.image == null"> <i class="fa fa-file-image"></i> &nbsp;Add Image</div>
+                    <div class="add_image" (click)="removeImage()" *ngIf="createPostForm.value.image != null"> <i class="fa fa-trash-alt"></i> &nbsp;Remove Image</div>
+                    <button class="submit_post"><i class="fa fa-paper-plane"></i> &nbsp;Submit Post</button>
+                </div>
+            </div>
+        </form>
+        <div class="refreshing_message" *ngIf='refreshingData'> <i class="fa fa-spinner"></i> &nbsp; Loading Data</div>
+        <div *ngIf="postList.length < 1 && !refreshingData" style="font-size: 30px; color : #7f7f7f; padding-top: 30px;">There are no post to show.</div>
+        <app-post *ngFor="let post of postList" [post]="post" [isAdvertisement]=false [forApproval]="false">
+            
+        </app-post>
+    </div>
+    <div class="ad_container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <div>
+                
+            </div>
+        </div>
+        <div class="container_header">
+            <div class="container_name">
+                Advertisement Board
+            </div>
+        </div>
+        <div class="refreshing_message"  *ngIf='refreshingData'> <i class="fa fa-spinner"></i> &nbsp; Loading Data</div>
+        <div *ngIf="advertisementList.length < 1  && !refreshingData" style="font-size: 30px; color : #7f7f7f; padding-top: 30px;">There are no advertisement to show.</div>
+        <app-post *ngFor="let post of advertisementList" [post]="post" [isAdvertisement]=true [forApproval]="false"></app-post>
+    </div>
+
+</div>

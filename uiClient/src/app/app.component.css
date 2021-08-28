@@ -1,0 +1,10 @@
+.topnav
+{
+    background: #D84354;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to bottom, #C6426E, #642B73);  */
+    /* background: linear-gradient(to bottom, #C6426E, #642B73);  */
+    position: sticky;
+    top: 0;
+    height: 80px;
+    width: 100%;
+}
